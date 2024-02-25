@@ -12,19 +12,17 @@ searchButton.addEventListener('click', () => {
 
     if (location) {
         const apiUrl = `${baseUrl}?key=${apiKey}&q=${location}`;
-        fetchWeather(apiUrl);
+        fetchData(apiUrl);
     } else {
+        locationElement.textContent = 'Please enter a location';
         console.error('Please enter a location.');
     }
 });
 
-function fetchWeather(apiUrl) {
-    fetchData(apiUrl);
-}
 
-async function fetchData(url) {
+async function fetchData(apiUrl) {
     try {
-        const response = await fetch(url, { mode: 'cors' });
+        const response = await fetch(apiUrl, { mode: 'cors' });
         const data = await response.json();
 
         locationElement.textContent = data.location.name;
